@@ -11,4 +11,9 @@ class Checklist extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['name', 'checklist_group_id'];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

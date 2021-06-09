@@ -9,16 +9,6 @@
         </li>
 
         @if (auth()->user()->is_admin)
-            <li class="c-sidebar-nav-title">{{ __('Admin') }}</li>
-
-            <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-                <a class="c-sidebar-nav-link" href="{{ route('admin.pages.index') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-puzzle') }}"></use>
-                    </svg>{{ __('Pages') }}
-                </a>
-            </li>
-
             <li class="c-sidebar-nav-title">{{ __('Manage checklists') }}</li>
 
             @foreach (\App\Models\ChecklistGroup::with('checklists')->get() as $group)
@@ -45,9 +35,20 @@
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.checklist_groups.create') }}">{{ __('Create new checklist group') }}</a>
             </li>
+            <li class="c-sidebar-nav-title">{{ __('Pages') }}</li>
+            @foreach (\App\Models\Page::all() as $page)
+                <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.pages.edit', $page) }}">
+                        <svg class="c-sidebar-nav-icon">
+                            <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-puzzle') }}"></use>
+                        </svg>{{ $page->title }}
+                    </a>
+                </li>
+            @endforeach
         @endif
 
-        <li class="c-sidebar-nav-item">
+            <li class="c-sidebar-nav-title">{{ __('Other') }}</li>
+            <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer') }}"></use>

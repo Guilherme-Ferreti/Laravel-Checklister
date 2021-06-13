@@ -3,7 +3,7 @@
         @if (auth()->user()->is_admin)
             <li class="c-sidebar-nav-title">{{ __('Manage checklists') }}</li>
 
-            @foreach (\App\Models\ChecklistGroup::with('checklists')->get() as $group)
+            @foreach ($admin_menu as $group)
                 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
                     
                     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="{{ route('admin.checklist_groups.edit', $group) }}">
@@ -15,7 +15,7 @@
                     <ul class="c-sidebar-nav-dropdown-items">
                         @foreach ($group->checklists as $checklist)
                         <li class="c-sidebar-nav-item">
-                            <a class="c-sidebar-nav-link" href="{{ route('admin.checklist_groups.checklists.edit', [$group, $checklist]) }}" style="padding: .5rem .5rem .5rem 76px;">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.checklist_groups.checklists.edit', [$group, $checklist]) }}" style="padding: 1rem .5rem .5rem 76px;">
                                 <svg class="c-sidebar-nav-icon">
                                     <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-list') }}"></use>
                                 </svg>
@@ -24,7 +24,7 @@
                         </li>
                         @endforeach
                         <li class="c-sidebar-nav-item">
-                            <a class="c-sidebar-nav-link" href="{{ route('admin.checklist_groups.checklists.create', $group) }}">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.checklist_groups.checklists.create', $group) }}" style="padding: .5rem .5rem .5rem 76px;">
                                 <svg class="c-sidebar-nav-icon">
                                     <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-note-add') }}"></use>
                                 </svg>

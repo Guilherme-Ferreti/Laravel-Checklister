@@ -83,7 +83,15 @@
                     <a class="c-sidebar-nav-link" href="{{ route('users.checklists.show', $checklist['id']) }}">
                         <svg class="c-sidebar-nav-icon">
                             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-list"></use>
-                        </svg> {{ $checklist['name'] }}
+                        </svg> 
+                        
+                        {{ $checklist['name'] }}
+
+                        @livewire('completed-tasks-counter', [
+                            'completed_tasks' => count($checklist['user_tasks']),
+                            'tasks_count' => count($checklist['tasks']),
+                            'checklist_id' => $checklist['id'],
+                        ])
 
                         @if ($checklist['is_new']) 
                             <span class="badge badge-info">NEW</span>

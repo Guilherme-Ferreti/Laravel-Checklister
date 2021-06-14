@@ -44,6 +44,8 @@ class TaskController extends Controller
             'position' => DB::raw('position - 1') 
         ]);
 
+        Task::where('task_id', $task->id)->delete();
+
         $task->delete();
 
         return redirect()->route('admin.checklist_groups.checklists.edit', [

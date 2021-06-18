@@ -17,10 +17,10 @@ class CompletedTasksCounter extends Component
         return view('livewire.completed-tasks-counter');
     }
 
-    public function recalculate_tasks(int $task_id, int $checklist_id)
+    public function recalculate_tasks(int $task_id, int $checklist_id, $count_change = 1)
     {
         if ($this->checklist_id == $checklist_id) {
-            $this->completed_tasks++;
+            $this->completed_tasks+= $count_change;
         }
     }
 }
